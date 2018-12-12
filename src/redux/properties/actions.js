@@ -2,8 +2,10 @@ import { normalize } from 'normalizr';
 import { get } from '../../service/api/core';
 
 import { GET_PROPERTIES_REQUESTED, GET_PROPERTIES_SUCCEEDED } from './types';
-// import { arrayOfProperties } from '../schema';
+import { arrayOfProperties } from './schema';
 import { groupByPublisher } from '../../service/properties';
+import { getVivaPropertiesSucceeded } from './viva/actions';
+import { getZapPropertiesSucceeded } from './zap/actions';
 
 export function getPropertiesSucceeded() {
   return {
@@ -24,8 +26,14 @@ export function getProperties() {
     const properties = await get(
       'http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/source-1.json'
     );
-    const propertiesGroupedByPublisher = groupByPublisher(properties);
+    const { viva: vivaProperties, zap: zapProperties } = groupByPublisher(
+      properties
+    );
+    const normalizedVivaPayload = normalize(vivaProperties, arrayOfProperties);
+    const normalizedZapPayload = normalize(zapProperties, arrayOfProperties);
 
+    dispatch(getVivaPropertiesSucceeded(normalizedVivaPayload));
+    dispatch(getZapPropertiesSucceeded(normalizedZapPayload));
     dispatch(getPropertiesSucceeded());
   };
 }

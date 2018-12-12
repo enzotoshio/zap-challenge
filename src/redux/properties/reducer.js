@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import viva from './viva/reducer';
+import zap from './zap/reducer';
 
 import {
   GET_PROPERTIES_SUCCEEDED,
@@ -35,4 +36,4 @@ export function errorMessage(state = errorMessageInitialState, action) {
   }
 }
 
-export default combineReducers({ viva, isLoading, errorMessage });
+export default combineReducers({ viva, zap, isLoading, errorMessage });
