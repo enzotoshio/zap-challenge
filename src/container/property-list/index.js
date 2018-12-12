@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getProperties } from '../../redux/properties/actions';
+import { getVivaPropertiesSelector } from '../../redux/properties/selectors';
 
 class PropertyList extends Component {
+  componentDidMount() {
+    this.props.boundGetProperties();
+  }
+
   render() {
     return (
       <div className="App">
@@ -12,4 +20,24 @@ class PropertyList extends Component {
   }
 }
 
-export default PropertyList;
+PropertyList.defaultProps = {
+  vivaProperties: [],
+};
+
+PropertyList.propTypes = {
+  boundGetProperties: PropTypes.func.isRequired,
+  vivaProperties: PropTypes.arrayOf(Object),
+};
+
+const mapDispatchToProps = {
+  boundGetProperties: getProperties,
+};
+
+const mapStateToProps = state => ({
+  vivaProperties: getVivaPropertiesSelector(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PropertyList);
