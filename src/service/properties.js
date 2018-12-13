@@ -1,11 +1,11 @@
-import { getPropertyPublisher } from './property';
+import { getPropertyPublishers } from './property';
 
 export function groupByPublisher(list) {
   return list.reduce(
     (acc, item) => {
-      const publisher = getPropertyPublisher(item) || 'other';
+      const publishers = getPropertyPublishers(item);
 
-      acc[publisher].push(item);
+      publishers.forEach(publisher => acc[publisher].push(item));
 
       return acc;
     },

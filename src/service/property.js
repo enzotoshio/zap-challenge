@@ -1,3 +1,5 @@
+import { isEmpty } from 'lodash';
+
 export const rules = {
   zap: [
     ({ pricingInfos: { price, businessType } }) =>
@@ -13,14 +15,18 @@ export const rules = {
   ],
 };
 
-export function getPropertyPublisher(property) {
-  return Object.keys(rules).reduce((acc, publisher) => {
+export function getPropertyPublishers(property) {
+  const publishers = Object.keys(rules).reduce((acc, publisher) => {
     const isFromPublisher = rules[publisher].some(rule => rule(property));
 
-    if (isFromPublisher) return publisher;
+    if (isFromPublisher) acc.push(publisher);
 
     return acc;
-  }, '');
+  }, []);
+
+  if (isEmpty(publishers)) publishers.push('other');
+
+  return publishers;
 }
 
 export function isRental({ businessType }) {
@@ -31,4 +37,4 @@ export function isSale({ businessType }) {
   return businessType === 'SALE';
 }
 
-export default { getPropertyPublisher, rules, isRental, isSale };
+export default { getPropertyPublishers, rules, isRental, isSale };
