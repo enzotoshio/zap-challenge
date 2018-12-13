@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import List from '../List';
+import List from '../list';
+import Button from '../button';
 
 class PaginatedList extends Component {
   constructor(props) {
@@ -42,12 +43,9 @@ class PaginatedList extends Component {
       list.length > 0 && (
         <div>
           <List items={list[currentPage]} />
-          <button disabled={!hasPrevPage} onClick={this.prevPage}>
-            prev
-          </button>
-          <button disabled={!hasNextPage} onClick={this.nextPage}>
-            next
-          </button>
+          <Button disabled={!hasPrevPage} onClick={this.prevPage} text="<" />
+
+          <Button disabled={!hasNextPage} onClick={this.nextPage} text=">" />
         </div>
       )
     );

@@ -5,7 +5,9 @@ import _ from 'lodash';
 import { getProperties } from '../../redux/properties/actions';
 import { getPaginatedVivaProperties } from '../../redux/properties/viva/selectors';
 import { getPaginatedZapProperties } from '../../redux/properties/zap/selectors';
-import PaginatedList from '../../component/PaginatedList';
+import PaginatedList from '../../component/paginated-list';
+import './style.css';
+import ToggleButton from '../../component/toggle-button';
 
 class PropertyList extends Component {
   constructor(props) {
@@ -42,16 +44,21 @@ class PropertyList extends Component {
     const { vivaProperties, zapProperties } = this.props;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <ul>
-            <li onClick={() => this.selectList('viva')}>Viva</li>
-            <li onClick={() => this.selectList('zap')}>Zap</li>
-          </ul>
-          <p>Property list</p>
-          {isVivaSelected && <PaginatedList list={vivaProperties} />}
-          {isZapSelected && <PaginatedList list={zapProperties} />}
-        </header>
+      <div className="app-container">
+        <ul className="menu">
+          <ToggleButton
+            selected={isVivaSelected}
+            onClick={() => this.selectList('viva')}
+            text="Viva"
+          />
+          <ToggleButton
+            selected={isZapSelected}
+            onClick={() => this.selectList('zap')}
+            text="Zap"
+          />
+        </ul>
+        {isVivaSelected && <PaginatedList list={vivaProperties} />}
+        {isZapSelected && <PaginatedList list={zapProperties} />}
       </div>
     );
   }

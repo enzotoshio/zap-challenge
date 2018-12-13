@@ -1,0 +1,38 @@
+.list {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 1290px;
+  flex-wrap: wrap;
+}
+
+.list-item {
+  display: block;
+  position: relative;
+  z-index: 1;
+  display: block;
+  background: #fff;
+  min-width: 270px;
+  height: 470px;
+  border-radius: 1px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  color: #000;
+}
+
+.list-item:hover {
+  cursor: pointer;
+}
+
+.thumbnail {
+  background: #000;
+  height: 300px;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+}
+
+img:hover {
+  opacity: 0.7;
+}
