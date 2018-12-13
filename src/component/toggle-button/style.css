@@ -4,6 +4,7 @@
   color: #fff;
   margin-right: 15px;
   cursor: pointer;
+  user-select: none;
 }
 
 .toggle-button.selected {

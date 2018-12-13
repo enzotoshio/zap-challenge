@@ -47,11 +47,13 @@ class PropertyList extends Component {
       <div className="app-container">
         <ul className="menu">
           <ToggleButton
+            className="menu-button"
             selected={isVivaSelected}
             onClick={() => this.selectList('viva')}
             text="Viva"
           />
           <ToggleButton
+            className="menu-button"
             selected={isZapSelected}
             onClick={() => this.selectList('zap')}
             text="Zap"
