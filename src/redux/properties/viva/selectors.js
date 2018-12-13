@@ -1,4 +1,25 @@
-export const getVivaPropertiesSelector = state =>
-  state.properties.viva.allIds.map(id => state.properties.viva.byId[id]);
+import { createSelector } from 'reselect';
+import { chunk } from 'lodash';
 
-export default { getVivaPropertiesSelector };
+export const getAvailableVivaPropertiesIds = ({ properties }) =>
+  properties.viva.allIds;
+export const getAllVivaPropertiesRegisters = ({ properties }) =>
+  properties.viva.byId;
+
+export const getVivaProperties = createSelector(
+  getAvailableVivaPropertiesIds,
+  getAllVivaPropertiesRegisters,
+  (ids, properties) => ids.map(id => properties[id])
+);
+
+export const getPaginatedVivaProperties = createSelector(
+  getVivaProperties,
+  properties => chunk(properties, 20)
+);
+
+export default {
+  getVivaProperties,
+  getPaginatedVivaProperties,
+  getAvailableVivaPropertiesIds,
+  getAllVivaPropertiesRegisters,
+};
