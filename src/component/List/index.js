@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import './style.css';
 import { propertyType as propertyTypeEnum } from '../../enum/property';
-import { propertyPath } from '../../routes';
+import ThumbnailGallery from '../thumbnail-gallery';
 
 function List({ items, history }) {
   const listItems = items.map(item => (
@@ -12,15 +12,7 @@ function List({ items, history }) {
       key={item.id}
       onClick={() => history.push(`/property/${item.id}`)}
     >
-      <div className="thumbnail">
-        <div className="thumbnail-arrow-container thumbnail-left-arrow-container">
-          <div className="thumbnail-arrow thumbnail-left-arrow" />
-        </div>
-        <img src={item.images[0]} alt="Fotos do imóvel" />
-        <div className="thumbnail-arrow-container thumbnail-right-arrow-container">
-          <div className="thumbnail-arrow thumbnail-right-arrow" />
-        </div>
-      </div>
+      <ThumbnailGallery images={item.images} />
       <div className="list-item-description">
         <p>
           Apartamento para{' '}
