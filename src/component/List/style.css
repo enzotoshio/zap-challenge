@@ -29,12 +29,53 @@
   height: 300px;
   width: 100%;
   overflow: hidden;
+  position: relative;
+}
+
+.thumbnail-arrow-container:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.thumbnail-arrow-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50px;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  justify-content: center;
+}
+
+.thumbnail-left-arrow-container {
+  left: 0;
+}
+
+.thumbnail-right-arrow-container {
+  right: 0;
+}
+
+.thumbnail-arrow {
+  top: 50%;
+  right: 1em;
+  width: 1em;
+  height: 1em;
+  transform-origin: 50% 50%;
+  box-shadow: inset -0.2em 0.2em 0 0 #fff;
+  border-radius: 0 0.15em 0 0;
+  margin-left: 1vw;
+}
+
+.thumbnail-left-arrow {
+  transform: rotate(225deg);
+}
+
+.thumbnail-right-arrow {
+  transform: rotate(45deg);
 }
 
 img {
+  z-index: 1;
   display: block;
-}
-
-img:hover {
-  opacity: 0.7;
 }

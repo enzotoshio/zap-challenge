@@ -13,7 +13,13 @@ function List({ items, history }) {
       onClick={() => history.push(`/property/${item.id}`)}
     >
       <div className="thumbnail">
+        <div className="thumbnail-arrow-container thumbnail-left-arrow-container">
+          <div className="thumbnail-arrow thumbnail-left-arrow" />
+        </div>
         <img src={item.images[0]} alt="Fotos do imóvel" />
+        <div className="thumbnail-arrow-container thumbnail-right-arrow-container">
+          <div className="thumbnail-arrow thumbnail-right-arrow" />
+        </div>
       </div>
 
       <p>
