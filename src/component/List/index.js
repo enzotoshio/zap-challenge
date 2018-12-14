@@ -21,20 +21,19 @@ function List({ items, history }) {
           <div className="thumbnail-arrow thumbnail-right-arrow" />
         </div>
       </div>
-
-      <p>
-        Apartamento para{' '}
-        {propertyTypeEnum[item.pricingInfos.businessType.toLowerCase()]}
-      </p>
-      <ul>
-        <li>Banheiros: {item.bathrooms}</li>
-        <li>Quartos: {item.bedrooms}</li>
-        <li>
+      <div className="list-item-description">
+        <p>
+          Apartamento para{' '}
+          {propertyTypeEnum[item.pricingInfos.businessType.toLowerCase()]}
+        </p>
+        <p>Banheiros: {item.bathrooms}</p>
+        <p>Quartos: {item.bedrooms}</p>
+        <p>
           Área: {item.usableAreas}m<sup>2</sup>
-        </li>
-        <li>Vagas: {item.parkingSpaces}</li>
-      </ul>
-      <p>R${item.pricingInfos.price}</p>
+        </p>
+        <p>Vagas: {item.parkingSpaces}</p>
+        <p>R${item.pricingInfos.price}</p>
+      </div>
     </li>
   ));
 
