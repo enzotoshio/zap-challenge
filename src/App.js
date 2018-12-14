@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import './App.css';
-import { propertyListPath } from './routes';
+import { propertyListPath, propertyPath } from './routes';
 import PropertyListPage from './container/property-list-page';
+import PropertyPage from './container/property-page';
 
 function App() {
   return (
     <Switch>
       <Route path={propertyListPath} component={PropertyListPage} />
+      <Route path={propertyPath} component={PropertyPage} />
       <Redirect from="/" to={propertyListPath} />
     </Switch>
   );

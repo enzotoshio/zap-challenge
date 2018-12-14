@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import './style.css';
 import { propertyType as propertyTypeEnum } from '../../enum/property';
+import { propertyPath } from '../../routes';
 
-function List({ items }) {
+function List({ items, history }) {
   const listItems = items.map(item => (
-    <li className="list-item" key={item.id}>
+    <li
+      className="list-item"
+      key={item.id}
+      onClick={() => history.push(`/property/${item.id}`)}
+    >
       <div className="thumbnail">
         <img src={item.images[0]} alt="Fotos do imóvel" />
       </div>
@@ -37,4 +43,4 @@ List.propTypes = {
   items: PropTypes.arrayOf(Object),
 };
 
-export default List;
+export default withRouter(List);
