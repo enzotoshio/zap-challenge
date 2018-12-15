@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { getProperties } from '../../redux/properties/actions';
+import { fetchProperties } from '../../redux/properties/actions';
 import { getPaginatedVivaProperties } from '../../redux/properties/viva/selectors';
 import { getPaginatedZapProperties } from '../../redux/properties/zap/selectors';
 import PaginatedList from '../../component/paginated-list';
@@ -23,7 +23,7 @@ class PropertyList extends Component {
   }
 
   componentDidMount() {
-    this.props.boundGetProperties();
+    this.props.boundFetchProperties();
   }
 
   selectList(listName) {
@@ -81,13 +81,13 @@ PropertyList.defaultProps = {
 };
 
 PropertyList.propTypes = {
-  boundGetProperties: PropTypes.func.isRequired,
+  boundFetchProperties: PropTypes.func.isRequired,
   vivaProperties: PropTypes.arrayOf(Object),
   zapProperties: PropTypes.arrayOf(Object),
 };
 
 const mapDispatchToProps = {
-  boundGetProperties: getProperties,
+  boundFetchProperties: fetchProperties,
 };
 
 const mapStateToProps = state => ({

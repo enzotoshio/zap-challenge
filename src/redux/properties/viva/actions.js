@@ -1,10 +1,10 @@
-import { GET_VIVA_PROPERTIES_SUCCEEDED } from './types';
+import { FETCH_VIVA_PROPERTIES_SUCCEEDED } from './types';
 
-export function getVivaPropertiesSucceeded(payload) {
+export function fetchVivaPropertiesSucceeded(payload) {
   return {
-    type: GET_VIVA_PROPERTIES_SUCCEEDED,
+    type: FETCH_VIVA_PROPERTIES_SUCCEEDED,
     payload,
   };
 }
 
-export default { getVivaPropertiesSucceeded };
+export default { fetchVivaPropertiesSucceeded };

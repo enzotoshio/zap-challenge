@@ -4,24 +4,24 @@ import { get } from '../../service/api/core';
 import { GET_PROPERTIES_REQUESTED, GET_PROPERTIES_SUCCEEDED } from './types';
 import { arrayOfProperties } from './schema';
 import { groupByPublisher } from '../../service/properties';
-import { getVivaPropertiesSucceeded } from './viva/actions';
-import { getZapPropertiesSucceeded } from './zap/actions';
+import { fetchVivaPropertiesSucceeded } from './viva/actions';
+import { fetchZapPropertiesSucceeded } from './zap/actions';
 
-export function getPropertiesSucceeded() {
+export function fetchPropertiesSucceeded() {
   return {
     type: GET_PROPERTIES_SUCCEEDED,
   };
 }
 
-export function getPropertiesLoading() {
+export function fetchPropertiesLoading() {
   return {
     type: GET_PROPERTIES_REQUESTED,
   };
 }
 
-export function getProperties() {
+export function fetchProperties() {
   return async function(dispatch) {
-    dispatch(getPropertiesLoading());
+    dispatch(fetchPropertiesLoading());
 
     const properties = await get(
       'http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/source-1.json'
@@ -32,13 +32,18 @@ export function getProperties() {
     const normalizedVivaPayload = normalize(vivaProperties, arrayOfProperties);
     const normalizedZapPayload = normalize(zapProperties, arrayOfProperties);
 
-    dispatch(getVivaPropertiesSucceeded(normalizedVivaPayload));
-    dispatch(getZapPropertiesSucceeded(normalizedZapPayload));
-    dispatch(getPropertiesSucceeded());
+    dispatch(fetchVivaPropertiesSucceeded(normalizedVivaPayload));
+    dispatch(fetchZapPropertiesSucceeded(normalizedZapPayload));
+    dispatch(fetchPropertiesSucceeded());
   };
 }
 
+export function fetchProperty() {
+  return async function(dispatch, getState) {};
+}
+
 export default {
-  getPropertiesSucceeded,
-  getProperties,
+  fetchPropertiesSucceeded,
+  fetchPropertiesLoading,
+  fetchProperties,
 };

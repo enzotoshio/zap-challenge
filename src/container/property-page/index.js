@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import './style.css';
 import { getProperty } from '../../redux/properties/selectors';
 import { propertyType as propertyTypeEnum } from '../../enum/property';
+import { fetchProperty } from '../../redux/properties/actions';
 
 class PropertyList extends Component {
+  componentDidMount() {
+    this.props.boundFetchProperty();
+  }
   render() {
     const {
       property: {
@@ -65,8 +69,15 @@ PropertyList.propTypes = {
   }),
 };
 
+const mapDispatchToProps = {
+  boundFetchProperty: fetchProperty,
+};
+
 const mapStateToProps = (state, props) => ({
   property: getProperty(state, { id: props.match.params.id }),
 });
 
-export default connect(mapStateToProps)(PropertyList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PropertyList);
