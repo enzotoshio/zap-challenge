@@ -35,16 +35,15 @@ class PaginatedList extends Component {
 
   render() {
     const { currentPage } = this.state;
-    const { list } = this.props;
+    const { list, children } = this.props;
     const hasNextPage = currentPage < list.length - 1;
     const hasPrevPage = currentPage > 0;
 
     return (
       list.length > 0 && (
         <div>
-          <List items={list[currentPage]} />
+          <List items={list[currentPage]}>{children}</List>
           <Button disabled={!hasPrevPage} onClick={this.prevPage} text="<" />
-
           <Button disabled={!hasNextPage} onClick={this.nextPage} text=">" />
         </div>
       )
@@ -58,6 +57,7 @@ PaginatedList.defaultProps = {
 
 PaginatedList.propTypes = {
   list: PropTypes.arrayOf(Object),
+  children: PropTypes.node.isRequired,
 };
 
 export default PaginatedList;
