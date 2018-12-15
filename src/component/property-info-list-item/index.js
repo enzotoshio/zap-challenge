@@ -4,7 +4,7 @@ import { propertyType as propertyTypeEnum } from '../../enum/property';
 import ThumbnailGallery from '../thumbnail-gallery';
 import './style.css';
 
-function ProductInfoListItem({
+function PropertyInfoListItem({
   images,
   pricingInfos,
   bathrooms,
@@ -32,7 +32,7 @@ function ProductInfoListItem({
   );
 }
 
-ProductInfoListItem.defaultProps = {
+PropertyInfoListItem.defaultProps = {
   images: [],
   pricingInfos: {
     businessType: 'rental',
@@ -44,7 +44,7 @@ ProductInfoListItem.defaultProps = {
   parkingSpaces: 0,
 };
 
-ProductInfoListItem.propTypes = {
+PropertyInfoListItem.propTypes = {
   images: PropTypes.arrayOf(String),
   pricingInfos: PropTypes.shape({
     businessType: PropTypes.string,
@@ -56,4 +56,4 @@ ProductInfoListItem.propTypes = {
   parkingSpaces: PropTypes.number,
 };
 
-export default ProductInfoListItem;
+export default PropertyInfoListItem;

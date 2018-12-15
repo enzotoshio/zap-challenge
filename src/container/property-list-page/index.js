@@ -8,7 +8,7 @@ import { getPaginatedZapProperties } from '../../redux/properties/zap/selectors'
 import PaginatedList from '../../component/paginated-list';
 import './style.css';
 import ToggleButton from '../../component/toggle-button';
-import ProductInfoListItem from '../../component/product-info-list-item';
+import PropertyInfoListItem from '../../component/property-info-list-item';
 
 class PropertyList extends Component {
   constructor(props) {
@@ -62,12 +62,12 @@ class PropertyList extends Component {
         </ul>
         {isVivaSelected && (
           <PaginatedList list={vivaProperties}>
-            <ProductInfoListItem />
+            <PropertyInfoListItem />
           </PaginatedList>
         )}
         {isZapSelected && (
           <PaginatedList list={zapProperties}>
-            <ProductInfoListItem />
+            <PropertyInfoListItem />
           </PaginatedList>
         )}
       </div>

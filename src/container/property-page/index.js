@@ -1,92 +1,72 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-import { getProperties } from '../../redux/properties/actions';
-import { getPaginatedVivaProperties } from '../../redux/properties/viva/selectors';
-import { getPaginatedZapProperties } from '../../redux/properties/zap/selectors';
-import PaginatedList from '../../component/paginated-list';
 import './style.css';
-import ToggleButton from '../../component/toggle-button';
+import { getProperty } from '../../redux/properties/selectors';
+import { propertyType as propertyTypeEnum } from '../../enum/property';
 
 class PropertyList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      lists: {
-        viva: true,
-        zap: false,
-      },
-    };
-  }
-
-  componentDidMount() {
-    this.props.boundGetProperties();
-  }
-
-  selectList(listName) {
-    const { lists } = this.state;
-    const unselectedLists = _.mapValues(lists, list => false);
-
-    this.setState({
-      lists: {
-        ...unselectedLists,
-        [listName]: true,
-      },
-    });
-  }
-
   render() {
     const {
-      lists: { viva: isVivaSelected, zap: isZapSelected },
-    } = this.state;
-    const { vivaProperties, zapProperties } = this.props;
+      property: {
+        pricingInfos,
+        bathrooms,
+        bedrooms,
+        usableAreas,
+        parkingSpaces,
+      },
+    } = this.props;
 
     return (
       <div className="app-container">
-        <ul className="menu">
-          <ToggleButton
-            className="menu-button"
-            selected={isVivaSelected}
-            onClick={() => this.selectList('viva')}
-            text="Viva"
-          />
-          <ToggleButton
-            className="menu-button"
-            selected={isZapSelected}
-            onClick={() => this.selectList('zap')}
-            text="Zap"
-          />
-        </ul>
-        {isVivaSelected && <PaginatedList list={vivaProperties} />}
-        {isZapSelected && <PaginatedList list={zapProperties} />}
+        <div className="property-details">
+          <p>
+            Apartamento para{' '}
+            {propertyTypeEnum[pricingInfos.businessType.toLowerCase()]}
+          </p>
+          <p>Banheiros: {bathrooms}</p>
+          <p>Quartos: {bedrooms}</p>
+          <p>
+            Área: {usableAreas}m<sup>2</sup>
+          </p>
+          <p>Vagas: {parkingSpaces}</p>
+          <p>R${pricingInfos.price}</p>
+        </div>
       </div>
     );
   }
 }
 
 PropertyList.defaultProps = {
-  vivaProperties: [],
-  zapProperties: [],
+  property: {
+    images: [],
+    pricingInfos: {
+      businessType: 'rental',
+      price: '0',
+    },
+    bathrooms: 0,
+    bedrooms: 0,
+    usableAreas: 0,
+    parkingSpaces: 0,
+  },
 };
 
 PropertyList.propTypes = {
-  boundGetProperties: PropTypes.func.isRequired,
-  vivaProperties: PropTypes.arrayOf(Object),
-  zapProperties: PropTypes.arrayOf(Object),
+  property: PropTypes.shape({
+    images: PropTypes.arrayOf(String),
+    pricingInfos: PropTypes.shape({
+      businessType: PropTypes.string,
+      price: PropTypes.string,
+    }),
+    bathrooms: PropTypes.number,
+    bedrooms: PropTypes.number,
+    usableAreas: PropTypes.number,
+    parkingSpaces: PropTypes.number,
+  }),
 };
 
-const mapDispatchToProps = {
-  boundGetProperties: getProperties,
-};
-
-const mapStateToProps = state => ({
-  vivaProperties: getPaginatedVivaProperties(state),
-  zapProperties: getPaginatedZapProperties(state),
+const mapStateToProps = (state, props) => ({
+  property: getProperty(state, { id: props.match.params.id }),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PropertyList);
+export default connect(mapStateToProps)(PropertyList);

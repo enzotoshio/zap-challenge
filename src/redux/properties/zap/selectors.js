@@ -5,6 +5,8 @@ export const getAvailableZapPropertiesIds = ({ properties }) =>
   properties.zap.allIds;
 export const getAllZapPropertiesRegisters = ({ properties }) =>
   properties.zap.byId;
+export const getZapProperty = ({ properties }, { id }) =>
+  properties.zap.byId[id];
 
 export const getZapProperties = createSelector(
   getAvailableZapPropertiesIds,
@@ -19,6 +21,7 @@ export const getPaginatedZapProperties = createSelector(
 
 export default {
   getZapProperties,
+  getZapProperty,
   getPaginatedZapProperties,
   getAvailableZapPropertiesIds,
   getAllZapPropertiesRegisters,

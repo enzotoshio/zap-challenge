@@ -5,6 +5,8 @@ export const getAvailableVivaPropertiesIds = ({ properties }) =>
   properties.viva.allIds;
 export const getAllVivaPropertiesRegisters = ({ properties }) =>
   properties.viva.byId;
+export const getVivaProperty = ({ properties }, { id }) =>
+  properties.viva.byId[id];
 
 export const getVivaProperties = createSelector(
   getAvailableVivaPropertiesIds,
@@ -19,6 +21,7 @@ export const getPaginatedVivaProperties = createSelector(
 
 export default {
   getVivaProperties,
+  getVivaProperty,
   getPaginatedVivaProperties,
   getAvailableVivaPropertiesIds,
   getAllVivaPropertiesRegisters,
