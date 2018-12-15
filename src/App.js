@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import './App.css';
 import { propertyListPath, propertyPath } from './routes';
@@ -16,4 +15,4 @@ function App() {
   );
 }
 
-export default withRouter(connect()(App));
+export default withRouter(App);
