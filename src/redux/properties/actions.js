@@ -6,6 +6,7 @@ import { arrayOfProperties } from './schema';
 import { groupByPublisher } from '../../service/properties';
 import { fetchVivaPropertiesSucceeded } from './viva/actions';
 import { fetchZapPropertiesSucceeded } from './zap/actions';
+import { getProperty } from './selectors';
 
 export function fetchPropertiesSucceeded() {
   return {
@@ -38,12 +39,20 @@ export function fetchProperties() {
   };
 }
 
-export function fetchProperty() {
-  return async function(dispatch, getState) {};
+export function fetchProperty(id) {
+  return async function(dispatch, getState) {
+    const store = getState();
+    const property = getProperty(store, { id });
+
+    if (!property) {
+      dispatch(fetchProperties());
+    }
+  };
 }
 
 export default {
   fetchPropertiesSucceeded,
   fetchPropertiesLoading,
   fetchProperties,
+  fetchProperty,
 };

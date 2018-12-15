@@ -8,7 +8,7 @@ import { fetchProperty } from '../../redux/properties/actions';
 
 class PropertyList extends Component {
   componentDidMount() {
-    this.props.boundFetchProperty();
+    this.props.boundFetchProperty(this.props.match.params.id);
   }
   render() {
     const {
