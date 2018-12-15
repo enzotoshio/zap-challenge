@@ -35,3 +35,19 @@
   overflow: hidden;
   min-width: 300px;
 }
+
+@media (max-width: 400px) {
+  .property-details {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+
+  .property-details .details {
+    width: 100%;
+    margin: 0;
+  }
+
+  .property-details .gallery {
+    width: 100%;
+  }
+}

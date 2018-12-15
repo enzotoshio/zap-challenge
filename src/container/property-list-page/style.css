@@ -6,3 +6,9 @@
 .menu-button {
   margin-right: 15px;
 }
+
+@media (max-width: 400px) {
+  .property-list {
+    width: 100%;
+  }
+}

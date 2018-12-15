@@ -60,16 +60,18 @@ class PropertyList extends Component {
             text="Zap"
           />
         </ul>
-        {isVivaSelected && (
-          <PaginatedList list={vivaProperties}>
-            <PropertyInfoListItem />
-          </PaginatedList>
-        )}
-        {isZapSelected && (
-          <PaginatedList list={zapProperties}>
-            <PropertyInfoListItem />
-          </PaginatedList>
-        )}
+        <div className="property-list">
+          {isVivaSelected && (
+            <PaginatedList list={vivaProperties}>
+              <PropertyInfoListItem />
+            </PaginatedList>
+          )}
+          {isZapSelected && (
+            <PaginatedList list={zapProperties}>
+              <PropertyInfoListItem />
+            </PaginatedList>
+          )}
+        </div>
       </div>
     );
   }

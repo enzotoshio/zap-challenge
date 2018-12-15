@@ -6,23 +6,10 @@
   grid-column-gap: 30px;
 }
 
-@media (max-width: 1290px) {
-  .list {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 860px) {
-  .list {
-    grid-template-columns: 1fr;
-  }
-}
-
 .list-item {
   display: block;
   position: relative;
   z-index: 1;
-  display: block;
   background: #fff;
   min-width: 270px;
   height: 470px;
@@ -35,4 +22,22 @@
 
 .list-item:hover {
   cursor: pointer;
+}
+
+@media (max-width: 1290px) {
+  .list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .list-item {
+    width: 100%;
+  }
 }
