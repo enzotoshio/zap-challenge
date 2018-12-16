@@ -13,13 +13,13 @@
   height: 300px;
   background-color: #fff;
   color: #000;
-  font-size: 1em;
+  font-size: 0.7em;
   text-align: left;
   padding: 1em;
 }
 
 .property-details .details h2 {
-  font-size: 1.3em;
+  font-size: 1.2em;
   margin-bottom: 1em;
 }
 
@@ -36,18 +36,19 @@
   min-width: 300px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 710px) {
   .property-details {
     width: 100%;
     flex-direction: column-reverse;
+    align-items: center;
   }
 
   .property-details .details {
-    width: 100%;
+    width: 400px;
     margin: 0;
   }
 
   .property-details .gallery {
-    width: 100%;
+    width: 400px;
   }
 }
