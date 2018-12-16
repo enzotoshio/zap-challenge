@@ -10,7 +10,7 @@ import './style.css';
 import ToggleButton from '../../component/toggle-button';
 import PropertyInfoListItem from '../../component/property-info-list-item';
 
-class PropertyList extends Component {
+export class PropertyListPage extends Component {
   constructor(props) {
     super(props);
 
@@ -48,13 +48,13 @@ class PropertyList extends Component {
       <div className="app-container">
         <ul className="menu">
           <ToggleButton
-            className="menu-button"
+            className="menu-button viva-toggle-button"
             selected={isVivaSelected}
             onClick={() => this.selectList('viva')}
             text="Viva"
           />
           <ToggleButton
-            className="menu-button"
+            className="menu-button zap-toggle-button"
             selected={isZapSelected}
             onClick={() => this.selectList('zap')}
             text="Zap"
@@ -77,12 +77,12 @@ class PropertyList extends Component {
   }
 }
 
-PropertyList.defaultProps = {
+PropertyListPage.defaultProps = {
   vivaProperties: [],
   zapProperties: [],
 };
 
-PropertyList.propTypes = {
+PropertyListPage.propTypes = {
   boundFetchProperties: PropTypes.func.isRequired,
   vivaProperties: PropTypes.arrayOf(Object),
   zapProperties: PropTypes.arrayOf(Object),
@@ -100,4 +100,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PropertyList);
+)(PropertyListPage);
