@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyInfoListItem increments the current page 1`] = `
+<div
+  className="product-info-list-item"
+>
+  <div
+    className="thumbnail"
+  >
+    <div
+      className="thumbnail-arrow-container thumbnail-left-arrow-container "
+      onClick={[Function]}
+    >
+      <div
+        className="thumbnail-arrow thumbnail-left-arrow"
+      />
+    </div>
+    <img
+      alt="Fotos do imóvel"
+      src="pumba"
+    />
+    <div
+      className="thumbnail-arrow-container thumbnail-right-arrow-container "
+      onClick={[Function]}
+    >
+      <div
+        className="thumbnail-arrow thumbnail-right-arrow"
+      />
+    </div>
+  </div>
+  <div
+    className="description"
+  >
+    <p>
+      Apartamento para
+       
+      venda
+    </p>
+    <p>
+      Banheiros: 
+      10
+    </p>
+    <p>
+      Quartos: 
+      10
+    </p>
+    <p>
+      Área: 
+      10
+      m
+      <sup>
+        2
+      </sup>
+    </p>
+    <p>
+      Vagas: 
+      10
+    </p>
+    <p>
+      R$
+      10
+    </p>
+  </div>
+</div>
+`;

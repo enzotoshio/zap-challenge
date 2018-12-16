@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import './style.css';
 
-function List({ items, history, children }) {
+export function List({ items, history, children }) {
   const listItems = items.map(item => (
     <li
       className="list-item"

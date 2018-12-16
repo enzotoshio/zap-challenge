@@ -43,8 +43,18 @@ class PaginatedList extends Component {
       list.length > 0 && (
         <div>
           <List items={list[currentPage]}>{children}</List>
-          <Button disabled={!hasPrevPage} onClick={this.prevPage} text="<" />
-          <Button disabled={!hasNextPage} onClick={this.nextPage} text=">" />
+          <Button
+            className="left-button"
+            disabled={!hasPrevPage}
+            onClick={this.prevPage}
+            text="<"
+          />
+          <Button
+            className="right-button"
+            disabled={!hasNextPage}
+            onClick={this.nextPage}
+            text=">"
+          />
         </div>
       )
     );
