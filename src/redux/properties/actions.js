@@ -1,11 +1,21 @@
 import { normalize } from 'normalizr';
 import { get } from '../../service/api/core';
 
-import { GET_PROPERTIES_REQUESTED, GET_PROPERTIES_SUCCEEDED } from './types';
+import {
+  GET_PROPERTIES_REQUESTED,
+  GET_PROPERTIES_SUCCEEDED,
+  GET_PROPERTIES_FAILED,
+} from './types';
 import { arrayOfProperties } from './schema';
 import { groupByPublisher } from '../../service/properties';
-import { fetchVivaPropertiesSucceeded } from './viva/actions';
-import { fetchZapPropertiesSucceeded } from './zap/actions';
+import {
+  fetchVivaPropertiesSucceeded,
+  fetchVivaPropertiesFailed,
+} from './viva/actions';
+import {
+  fetchZapPropertiesSucceeded,
+  fetchZapPropertiesFailed,
+} from './zap/actions';
 import { getProperty } from './selectors';
 
 export function fetchPropertiesSucceeded() {
@@ -14,28 +24,46 @@ export function fetchPropertiesSucceeded() {
   };
 }
 
-export function fetchPropertiesLoading() {
+export function fetchPropertiesRequested() {
   return {
     type: GET_PROPERTIES_REQUESTED,
   };
 }
 
+export function fetchPropertiesFailed({ message }) {
+  return {
+    type: GET_PROPERTIES_FAILED,
+    payload: { message },
+  };
+}
+
 export function fetchProperties() {
   return async function(dispatch) {
-    dispatch(fetchPropertiesLoading());
+    dispatch(fetchPropertiesRequested());
 
-    const properties = await get(
-      'http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/source-1.json'
-    );
-    const { viva: vivaProperties, zap: zapProperties } = groupByPublisher(
-      properties
-    );
-    const normalizedVivaPayload = normalize(vivaProperties, arrayOfProperties);
-    const normalizedZapPayload = normalize(zapProperties, arrayOfProperties);
+    try {
+      const properties = await get(
+        'http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/source-1.json'
+      );
+      const { viva: vivaProperties, zap: zapProperties } = groupByPublisher(
+        properties
+      );
+      const normalizedVivaPayload = normalize(
+        vivaProperties,
+        arrayOfProperties
+      );
+      const normalizedZapPayload = normalize(zapProperties, arrayOfProperties);
 
-    dispatch(fetchVivaPropertiesSucceeded(normalizedVivaPayload));
-    dispatch(fetchZapPropertiesSucceeded(normalizedZapPayload));
-    dispatch(fetchPropertiesSucceeded());
+      dispatch(fetchVivaPropertiesSucceeded(normalizedVivaPayload));
+      dispatch(fetchZapPropertiesSucceeded(normalizedZapPayload));
+      dispatch(fetchPropertiesSucceeded());
+    } catch (error) {
+      dispatch(fetchVivaPropertiesFailed());
+      dispatch(fetchZapPropertiesFailed());
+      dispatch(
+        fetchPropertiesFailed({ message: 'Erro ao buscar propriedades.' })
+      );
+    }
   };
 }
 
@@ -52,7 +80,8 @@ export function fetchProperty(id) {
 
 export default {
   fetchPropertiesSucceeded,
-  fetchPropertiesLoading,
+  fetchPropertiesRequested,
+  fetchPropertiesFailed,
   fetchProperties,
   fetchProperty,
 };
