@@ -3,20 +3,20 @@ import viva from './viva/reducer';
 import zap from './zap/reducer';
 
 import {
-  GET_PROPERTIES_SUCCEEDED,
-  GET_PROPERTIES_REQUESTED,
-  GET_PROPERTIES_FAILED,
+  FETCH_PROPERTIES_SUCCEEDED,
+  FETCH_PROPERTIES_REQUESTED,
+  FETCH_PROPERTIES_FAILED,
 } from './types';
 
 export const isLoadingInitialState = false;
 
 export function isLoading(state = isLoadingInitialState, action) {
   switch (action.type) {
-    case GET_PROPERTIES_REQUESTED:
+    case FETCH_PROPERTIES_REQUESTED:
       return true;
-    case GET_PROPERTIES_SUCCEEDED:
-    case GET_PROPERTIES_FAILED:
-      return isLoadingInitialState;
+    case FETCH_PROPERTIES_SUCCEEDED:
+    case FETCH_PROPERTIES_FAILED:
+      return false;
     default:
       return state;
   }
@@ -26,10 +26,10 @@ export const errorMessageInitialState = null;
 
 export function errorMessage(state = errorMessageInitialState, action) {
   switch (action.type) {
-    case GET_PROPERTIES_REQUESTED:
-    case GET_PROPERTIES_SUCCEEDED:
-      return errorMessageInitialState;
-    case GET_PROPERTIES_FAILED:
+    case FETCH_PROPERTIES_REQUESTED:
+    case FETCH_PROPERTIES_SUCCEEDED:
+      return null;
+    case FETCH_PROPERTIES_FAILED:
       return action.payload.message;
     default:
       return state;

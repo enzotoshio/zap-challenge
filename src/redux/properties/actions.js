@@ -2,9 +2,9 @@ import { normalize } from 'normalizr';
 import { get } from '../../service/api/core';
 
 import {
-  GET_PROPERTIES_REQUESTED,
-  GET_PROPERTIES_SUCCEEDED,
-  GET_PROPERTIES_FAILED,
+  FETCH_PROPERTIES_REQUESTED,
+  FETCH_PROPERTIES_SUCCEEDED,
+  FETCH_PROPERTIES_FAILED,
 } from './types';
 import { arrayOfProperties } from './schema';
 import { groupByPublisher } from '../../service/properties';
@@ -20,19 +20,19 @@ import { getProperty } from './selectors';
 
 export function fetchPropertiesSucceeded() {
   return {
-    type: GET_PROPERTIES_SUCCEEDED,
+    type: FETCH_PROPERTIES_SUCCEEDED,
   };
 }
 
 export function fetchPropertiesRequested() {
   return {
-    type: GET_PROPERTIES_REQUESTED,
+    type: FETCH_PROPERTIES_REQUESTED,
   };
 }
 
 export function fetchPropertiesFailed({ message }) {
   return {
-    type: GET_PROPERTIES_FAILED,
+    type: FETCH_PROPERTIES_FAILED,
     payload: { message },
   };
 }
