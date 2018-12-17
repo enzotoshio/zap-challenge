@@ -34,7 +34,7 @@ npm test
 
 Launches the test runner in the interactive watch mode.
 
-### Run the tests
+### Debug the tests
 
 ```sh
 npm run test:debug
